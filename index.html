@@ -1,12 +1,25 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>news-splash-surf</title>
-    <meta name="description" content="Lovable Generated Project" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Daily News - Stay Informed</title>
+    <meta name="description" content="Get the latest news and headlines from around the world. Daily News brings you breaking news, top stories, and trending topics." />
     <meta name="author" content="Lovable" />
     <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="theme-color" content="#000000" />
+    
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!-- Preconnect to domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
 
   <body>
@@ -14,5 +27,44 @@
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- PWA prompt for iOS -->
+    <script>
+      // Check if the app is already installed
+      if (window.navigator.standalone === false) {
+        // Check if the user has dismissed the prompt before
+        const hasPrompted = localStorage.getItem('pwaPrompt');
+        if (!hasPrompted && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
+          setTimeout(() => {
+            const promptDiv = document.createElement('div');
+            promptDiv.style.position = 'fixed';
+            promptDiv.style.bottom = '0';
+            promptDiv.style.left = '0';
+            promptDiv.style.right = '0';
+            promptDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+            promptDiv.style.color = 'white';
+            promptDiv.style.padding = '1rem';
+            promptDiv.style.display = 'flex';
+            promptDiv.style.alignItems = 'center';
+            promptDiv.style.justifyContent = 'space-between';
+            promptDiv.style.zIndex = '9999';
+            promptDiv.style.backdropFilter = 'blur(5px)';
+            promptDiv.innerHTML = `
+              <div>
+                <p style="margin: 0 0 0.5rem; font-weight: bold;">Install this app on your device</p>
+                <p style="margin: 0; font-size: 0.875rem;">Tap the share button and then "Add to Home Screen"</p>
+              </div>
+              <button style="background: none; border: none; color: white; padding: 0.5rem; font-size: 1.25rem; cursor: pointer;">×</button>
+            `;
+            document.body.appendChild(promptDiv);
+            
+            promptDiv.querySelector('button').addEventListener('click', () => {
+              document.body.removeChild(promptDiv);
+              localStorage.setItem('pwaPrompt', 'true');
+            });
+          }, 3000);
+        }
+      }
+    </script>
   </body>
 </html>
