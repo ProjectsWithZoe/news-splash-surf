@@ -187,7 +187,10 @@ const Article: React.FC = () => {
             <div className="mt-8 text-muted-foreground">
               <p>
                 Full article content is not available in the preview. Please
-                read the complete article <a href={article.link}>here.</a>
+                read the complete article{" "}
+                <a href={article.link} className="underlined text-blue-800">
+                  here.
+                </a>
                 <a
                   href={article.url}
                   target="_blank"
