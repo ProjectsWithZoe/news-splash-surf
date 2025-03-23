@@ -9,7 +9,7 @@ interface NewsListProps {
   initialCategory?: string;
 }
 
-const NewsList: React.FC<NewsListProps> = ({ initialCategory = "general" }) => {
+const NewsList: React.FC<NewsListProps> = ({ initialCategory = "WORLD" }) => {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
