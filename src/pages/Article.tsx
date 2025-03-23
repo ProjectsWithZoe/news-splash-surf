@@ -193,10 +193,9 @@ const Article: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary underline hover:text-primary/80 transition-colors"
-                >
-                  {article.source_name || "Source"}
-                </a>
+                ></a>
               </p>
+              <p>{article.source_name || "Source"}</p>
             </div>
           )}
         </article>
