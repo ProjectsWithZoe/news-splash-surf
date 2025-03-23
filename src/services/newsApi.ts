@@ -13,6 +13,7 @@ export interface NewsArticle {
   url: string;
   urlToImage: string | null;
   publishedAt: string;
+  published_datetime_utc: string;
   content: string | null;
   category?: string;
 }

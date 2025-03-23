@@ -1,10 +1,9 @@
-
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getRelativeTime } from '@/utils/dateUtils';
-import { NewsArticle, saveArticle } from '@/services/newsApi';
-import { ChevronRight, Clock, Share2, Bookmark } from 'lucide-react';
-import { toast } from 'sonner';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { getRelativeTime } from "@/utils/dateUtils";
+import { NewsArticle, saveArticle } from "@/services/newsApi";
+import { ChevronRight, Clock, Share2, Bookmark } from "lucide-react";
+import { toast } from "sonner";
 
 interface NewsCardProps {
   article: NewsArticle;
@@ -12,38 +11,44 @@ interface NewsCardProps {
   compact?: boolean;
 }
 
-const NewsCard: React.FC<NewsCardProps> = ({ article, index, compact = false }) => {
+const NewsCard: React.FC<NewsCardProps> = ({
+  article,
+  index,
+  compact = false,
+}) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   // Generate a unique ID for the article if it doesn't have one
   if (!article.id) {
-    article.id = btoa(article.url).replace(/=/g, '');
+    article.id = btoa(article.url).replace(/=/g, "");
   }
 
   const handleSaveArticle = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     saveArticle(article);
-    toast.success('Article saved for later');
+    toast.success("Article saved for later");
   };
 
   const handleShareArticle = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (navigator.share) {
-      navigator.share({
-        title: article.title,
-        text: article.description || '',
-        url: article.url
-      })
-      .then(() => toast.success('Article shared successfully'))
-      .catch((error) => console.error('Error sharing article:', error));
+      navigator
+        .share({
+          title: article.title,
+          text: article.description || "",
+          url: article.url,
+        })
+        .then(() => toast.success("Article shared successfully"))
+        .catch((error) => console.error("Error sharing article:", error));
     } else {
       // Fallback for browsers that don't support the Web Share API
-      navigator.clipboard.writeText(article.url)
-        .then(() => toast.success('Article URL copied to clipboard'))
-        .catch(() => toast.error('Failed to copy URL'));
+      navigator.clipboard
+        .writeText(article.url)
+        .then(() => toast.success("Article URL copied to clipboard"))
+        .catch(() => toast.error("Failed to copy URL"));
     }
   };
 
@@ -51,12 +56,12 @@ const NewsCard: React.FC<NewsCardProps> = ({ article, index, compact = false }) 
 
   if (compact) {
     return (
-      <Link 
+      <Link
         to={`/article/${article.id}`}
         className="block group"
         onClick={() => saveArticle(article)}
       >
-        <div 
+        <div
           className="flex items-start gap-3 p-3 rounded-md card-hover"
           style={{ animationDelay }}
         >
@@ -65,16 +70,20 @@ const NewsCard: React.FC<NewsCardProps> = ({ article, index, compact = false }) 
               <img
                 src={article.urlToImage}
                 alt={article.title}
-                className={`h-full w-full object-cover transition-all duration-500 ${isImageLoaded ? 'blur-0' : 'blur-sm'}`}
+                className={`h-full w-full object-cover transition-all duration-500 ${
+                  isImageLoaded ? "blur-0" : "blur-sm"
+                }`}
                 onLoad={() => setIsImageLoaded(true)}
               />
             </div>
           )}
           <div className="flex-1">
-            <h3 className="font-medium line-clamp-2 group-hover:text-primary text-balance transition-colors">{article.title}</h3>
+            <h3 className="font-medium line-clamp-2 group-hover:text-primary text-balance transition-colors">
+              {article.title}
+            </h3>
             <div className="flex items-center mt-1 text-xs text-muted-foreground">
               <Clock size={12} className="mr-1" />
-              <span>{getRelativeTime(article.publishedAt)}</span>
+              {/*<span>{getRelativeTime(article.published_datetime_utc)}</span>*/}
             </div>
           </div>
         </div>
@@ -83,14 +92,14 @@ const NewsCard: React.FC<NewsCardProps> = ({ article, index, compact = false }) 
   }
 
   return (
-    <div 
-      className="animate-slide-up opacity-0 overflow-hidden rounded-lg bg-card shadow-subtle card-hover" 
-      style={{ 
+    <div
+      className="animate-slide-up opacity-0 overflow-hidden rounded-lg bg-card shadow-subtle card-hover"
+      style={{
         animationDelay,
-        animationFillMode: 'forwards' 
+        animationFillMode: "forwards",
       }}
     >
-      <Link 
+      <Link
         to={`/article/${article.id}`}
         className="block group"
         onClick={() => saveArticle(article)}
@@ -100,7 +109,9 @@ const NewsCard: React.FC<NewsCardProps> = ({ article, index, compact = false }) 
             <img
               src={article.urlToImage}
               alt={article.title}
-              className={`h-full w-full object-cover transition-all duration-500 ${isImageLoaded ? 'blur-0' : 'blur-sm'}`}
+              className={`h-full w-full object-cover transition-all duration-500 ${
+                isImageLoaded ? "blur-0" : "blur-sm"
+              }`}
               onLoad={() => setIsImageLoaded(true)}
             />
             {article.source.name && (
@@ -115,7 +126,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ article, index, compact = false }) 
         <div className="p-4">
           <div className="mb-2 flex items-center gap-2">
             <span className="text-xs text-muted-foreground">
-              {getRelativeTime(article.publishedAt)}
+              {/*{getRelativeTime(article.published_datetime_utc)}*/}
             </span>
             {article.category && (
               <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary">
@@ -136,14 +147,14 @@ const NewsCard: React.FC<NewsCardProps> = ({ article, index, compact = false }) 
               Read more <ChevronRight size={16} className="ml-1" />
             </div>
             <div className="flex items-center gap-2">
-              <button 
+              <button
                 onClick={handleShareArticle}
                 className="p-2 rounded-full hover:bg-muted transition-colors"
                 aria-label="Share article"
               >
                 <Share2 size={16} />
               </button>
-              <button 
+              <button
                 onClick={handleSaveArticle}
                 className="p-2 rounded-full hover:bg-muted transition-colors"
                 aria-label="Save article"
