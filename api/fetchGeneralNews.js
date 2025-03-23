@@ -5,7 +5,7 @@ const API_KEY = process.env.NEWS_API;
 const BASE_URL = "https://newsapi.org/v2/top-headlines?";
 
 export default async function handler(req, res) {
-  const { country, category, pageSize = 10, page = 1 } = req.query;
+  const { country, category, pageSize = 20, page = 1 } = req.query;
 
   try {
     const url = `${BASE_URL}country=${country}&category=${category}&pageSize=${pageSize}&page=${page}&apiKey=${API_KEY}`;
