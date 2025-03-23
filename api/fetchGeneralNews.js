@@ -27,6 +27,7 @@ export default async function handler(req, res) {
       "DOGE",
       "Tesla",
       "US",
+      "Horoscope",
     ];
 
     const newResults = data.articles.filter((article) => {
