@@ -24,7 +24,8 @@ export default async function handler(req, res) {
     }
 
     const data = await response.json();
-    console.log(data.data);
+    const results = data.data;
+    console.log(results);
     const excludedItems = [
       "Trump",
       "trump",
@@ -38,7 +39,7 @@ export default async function handler(req, res) {
       "Horoscope",
     ];
 
-    const newResults = data.articles.filter((article) => {
+    const newResults = results.articles.filter((article) => {
       return !excludedItems.some((excluded) =>
         article.title.includes(excluded)
       );
