@@ -1,4 +1,3 @@
-
 import { toast } from "sonner";
 
 // News article interface
@@ -20,13 +19,13 @@ export interface NewsArticle {
 
 // Define the available categories
 export const categories = [
-  "general",
-  "business",
-  "entertainment",
-  "health",
-  "science",
-  "sports",
-  "technology"
+  "WORLD",
+  "NATIONAL",
+  "BUSINESS",
+  "TECHNOLOGY",
+  "ENTERTAINMENT",
+  "SPORTS",
+  "SCIENCE",
 ];
 
 // Free News API URL using newsapi.org
@@ -46,20 +45,20 @@ export const fetchTopHeadlines = async (
   category: string = "general",
   pageSize: number = 20,
   page: number = 1
-): Promise<{ articles: NewsArticle[], totalResults: number }> => {
+): Promise<{ articles: NewsArticle[]; totalResults: number }> => {
   try {
     const url = `${BASE_URL}/top-headlines?country=${country}&category=${category}&pageSize=${pageSize}&page=${page}&apiKey=${API_KEY}`;
     const response = await fetch(url);
-    
+
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.message || "Failed to fetch news");
     }
-    
+
     const data = await response.json();
     return {
       articles: data.articles,
-      totalResults: data.totalResults
+      totalResults: data.totalResults,
     };
   } catch (error) {
     console.error("Error fetching top headlines:", error);
@@ -78,20 +77,22 @@ export const searchNews = async (
   query: string,
   pageSize: number = 20,
   page: number = 1
-): Promise<{ articles: NewsArticle[], totalResults: number }> => {
+): Promise<{ articles: NewsArticle[]; totalResults: number }> => {
   try {
-    const url = `${BASE_URL}/everything?q=${encodeURIComponent(query)}&pageSize=${pageSize}&page=${page}&apiKey=${API_KEY}`;
+    const url = `${BASE_URL}/everything?q=${encodeURIComponent(
+      query
+    )}&pageSize=${pageSize}&page=${page}&apiKey=${API_KEY}`;
     const response = await fetch(url);
-    
+
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.message || "Failed to search news");
     }
-    
+
     const data = await response.json();
     return {
       articles: data.articles,
-      totalResults: data.totalResults
+      totalResults: data.totalResults,
     };
   } catch (error) {
     console.error("Error searching news:", error);
@@ -106,7 +107,9 @@ export const searchNews = async (
  * In a real app, this would fetch the full article from a backend
  * @param id The article ID
  */
-export const fetchArticleById = async (id: string): Promise<NewsArticle | null> => {
+export const fetchArticleById = async (
+  id: string
+): Promise<NewsArticle | null> => {
   // NOTE: NewsAPI doesn't provide an endpoint to fetch a single article by ID
   // In a real app, you would fetch this from your own backend or database
   // For demo purposes, we'll use localStorage as a simple cache

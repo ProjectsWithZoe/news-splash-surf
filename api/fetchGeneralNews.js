@@ -2,14 +2,21 @@
 import { toast } from "sonner";
 
 const API_KEY = process.env.NEWS_API;
-const BASE_URL = "https://newsapi.org/v2/top-headlines?";
+const BASE_URL = "https://real-time-news-data.p.rapidapi.com/topic-headlines?";
 
 export default async function handler(req, res) {
-  const { country, category, pageSize = 20, page = 1 } = req.query;
+  const { country, category } = req.query;
 
   try {
-    const url = `${BASE_URL}country=${country}&category=${category}&pageSize=${pageSize}&page=${page}&apiKey=${API_KEY}`;
-    const response = await fetch(url);
+    const url = `${BASE_URL}topic=${category}&country=${country}&apiKey=${API_KEY}`;
+    const options = {
+      method: "GET",
+      headers: {
+        "x-rapidapi-key": process.env.RAPID_APIKEY,
+        "x-rapidapi-host": process.env.RAPID_API_HOST,
+      },
+    };
+    const response = await fetch(url, options);
 
     if (!response.ok) {
       const errorData = await response.json();
@@ -17,6 +24,7 @@ export default async function handler(req, res) {
     }
 
     const data = await response.json();
+    console.log(data);
     const excludedItems = [
       "Trump",
       "trump",
