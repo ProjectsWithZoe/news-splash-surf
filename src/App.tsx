@@ -41,9 +41,9 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner position="top-right" closeButton />
+        <Analytics />
         <BrowserRouter>
           <Routes>
-            <Analytics />
             <Route path="/" element={<Index />} />
             <Route path="/article/:id" element={<Article />} />
             <Route path="/search" element={<Search />} />
