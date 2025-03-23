@@ -129,9 +129,9 @@ const Article: React.FC = () => {
 
             <div className="flex items-center">
               <Calendar size={14} className="mr-1" />
-              <time dateTime={article.published_datetime_utc}>
+              {/*<time dateTime={article.published_datetime_utc}>
                 {formatDate(article.published_datetime_utc)}
-              </time>
+              </time>*/}
             </div>
 
             {article.author && (
