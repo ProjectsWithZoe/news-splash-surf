@@ -171,15 +171,17 @@ const Article: React.FC = () => {
               <div className="mt-8 text-muted-foreground text-sm">
                 <p>
                   This is a preview. Read the full article{" "}
-                  <a href={article.link}> here</a>
+                  <a href={article.link} className="underlined text-blue-800">
+                    {" "}
+                    here
+                  </a>
                   <a
                     href={article.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-primary underline hover:text-primary/80 transition-colors"
-                  >
-                    {article.source_name || "Source"}
-                  </a>
+                  ></a>
+                  <p>{article.source_name || "Source"}</p>
                 </p>
               </div>
             </div>
