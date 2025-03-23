@@ -7,11 +7,14 @@ export interface NewsArticle {
     id: string | null;
     name: string;
   };
+  source_name: string | null;
   author: string | null;
   title: string;
   description: string | null;
   url: string;
   urlToImage: string | null;
+  link: string | null;
+  photo_url: string | null;
   publishedAt: string;
   published_datetime_utc: string;
   content: string | null;

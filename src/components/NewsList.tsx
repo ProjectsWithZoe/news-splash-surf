@@ -95,7 +95,8 @@ const NewsList: React.FC<NewsListProps> = ({ initialCategory = "WORLD" }) => {
                   : "bg-secondary/50 text-muted-foreground hover:bg-secondary"
               }`}
             >
-              {category.slice(1).toLowerCase()}
+              {category.charAt(0).toUpperCase() +
+                category.slice(1).toLowerCase()}
             </button>
           ))}
         </div>
