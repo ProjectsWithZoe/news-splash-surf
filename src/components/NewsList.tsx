@@ -24,12 +24,19 @@ const NewsList: React.FC<NewsListProps> = ({ initialCategory = "general" }) => {
       setError(null);
 
       const currentPage = resetList ? 1 : page;
-      const { articles: newArticles, totalResults } = await fetchTopHeadlines(
+      const response = await fetch(
+        "/api/fetchGeneralNews?country=us&category=general&pageSize=10&page=1"
+      );
+      const { articles: newArticles, totalResults } = await response.json();
+
+      console.log(articles);
+
+      /*const { articles: newArticles, totalResults } = await fetchTopHeadlines(
         "us",
         selectedCategory,
         20,
         currentPage
-      );
+      );*/
       //'us',selectedCategory, 10, currentPage;
 
       // Add category to each article
