@@ -39,7 +39,7 @@ export default async function handler(req, res) {
       "Horoscope",
     ];
 
-    const newResults = results.articles.filter((article) => {
+    const newResults = results.filter((article) => {
       return !excludedItems.some((excluded) =>
         article.title.includes(excluded)
       );
