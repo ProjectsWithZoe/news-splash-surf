@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NewsCard from "./NewsCard";
 import Loader from "./Loader";
-import { NewsArticle, fetchTopHeadlines, categories } from "@/services/newsApi";
+import { categories } from "@/services/newsApi";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 
@@ -10,7 +10,7 @@ interface NewsListProps {
 }
 
 const NewsList: React.FC<NewsListProps> = ({ initialCategory = "WORLD" }) => {
-  const [articles, setArticles] = useState<NewsArticle[]>([]);
+  const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);

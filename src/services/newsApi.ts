@@ -1,26 +1,5 @@
 import { toast } from "sonner";
 
-// News article interface
-export interface NewsArticle {
-  id?: string;
-  source: {
-    id: string | null;
-    name: string;
-  };
-  source_name: string | null;
-  author: string | null;
-  title: string;
-  description: string | null;
-  url: string;
-  urlToImage: string | null;
-  link: string | null;
-  photo_url: string | null;
-  publishedAt: string;
-  published_datetime_utc: string;
-  content: string | null;
-  category?: string;
-}
-
 // Define the available categories
 export const categories = [
   "WORLD",
@@ -44,11 +23,11 @@ const BASE_URL = "https://newsapi.org/v2";
  * @param page Page number (default: 1)
  */
 export const fetchTopHeadlines = async (
-  country: string = "us",
-  category: string = "general",
-  pageSize: number = 20,
-  page: number = 1
-): Promise<{ articles: NewsArticle[]; totalResults: number }> => {
+  country = "us",
+  category = "general",
+  pageSize = 20,
+  page = 1
+) => {
   try {
     const url = `${BASE_URL}/top-headlines?country=${country}&category=${category}&pageSize=${pageSize}&page=${page}&apiKey=${API_KEY}`;
     const response = await fetch(url);
@@ -80,7 +59,7 @@ export const searchNews = async (
   query: string,
   pageSize: number = 20,
   page: number = 1
-): Promise<{ articles: NewsArticle[]; totalResults: number }> => {
+) => {
   try {
     const url = `${BASE_URL}/everything?q=${encodeURIComponent(
       query
@@ -110,9 +89,7 @@ export const searchNews = async (
  * In a real app, this would fetch the full article from a backend
  * @param id The article ID
  */
-export const fetchArticleById = async (
-  id: string
-): Promise<NewsArticle | null> => {
+export const fetchArticleById = async (id: string) => {
   // NOTE: NewsAPI doesn't provide an endpoint to fetch a single article by ID
   // In a real app, you would fetch this from your own backend or database
   // For demo purposes, we'll use localStorage as a simple cache
@@ -134,7 +111,7 @@ export const fetchArticleById = async (
  * In a real app, this would be saved to a backend
  * @param article The article to save
  */
-export const saveArticle = (article: NewsArticle): void => {
+export const saveArticle = (article) => {
   try {
     if (!article.id) {
       article.id = Date.now().toString();

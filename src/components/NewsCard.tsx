@@ -1,21 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { getRelativeTime } from "@/utils/dateUtils";
-import { NewsArticle, saveArticle } from "@/services/newsApi";
+import { saveArticle } from "@/services/newsApi";
 import { ChevronRight, Clock, Share2, Bookmark } from "lucide-react";
 import { toast } from "sonner";
 
 interface NewsCardProps {
-  article: NewsArticle;
   index: number;
   compact?: boolean;
 }
 
-const NewsCard: React.FC<NewsCardProps> = ({
-  article,
-  index,
-  compact = false,
-}) => {
+const NewsCard = ({ article, index, compact = false }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   // Generate a unique ID for the article if it doesn't have one
@@ -65,10 +60,10 @@ const NewsCard: React.FC<NewsCardProps> = ({
           className="flex items-start gap-3 p-3 rounded-md card-hover"
           style={{ animationDelay }}
         >
-          {article.urlToImage && (
+          {article.photo_url && (
             <div className="relative h-16 w-16 flex-shrink-0 rounded-sm overflow-hidden">
               <img
-                src={article.urlToImage}
+                src={article.photo_url}
                 alt={article.title}
                 className={`h-full w-full object-cover transition-all duration-500 ${
                   isImageLoaded ? "blur-0" : "blur-sm"
@@ -104,20 +99,20 @@ const NewsCard: React.FC<NewsCardProps> = ({
         className="block group"
         onClick={() => saveArticle(article)}
       >
-        {article.urlToImage && (
+        {article.photo_url && (
           <div className="relative aspect-video w-full overflow-hidden">
             <img
-              src={article.urlToImage}
+              src={article.photo_url}
               alt={article.title}
               className={`h-full w-full object-cover transition-all duration-500 ${
                 isImageLoaded ? "blur-0" : "blur-sm"
               }`}
               onLoad={() => setIsImageLoaded(true)}
             />
-            {article.source.name && (
+            {article.source_name && (
               <div className="absolute top-3 left-3">
                 <span className="px-2 py-1 text-xs font-medium rounded-md glass-effect">
-                  {article.source.name}
+                  {article.source_name}
                 </span>
               </div>
             )}
