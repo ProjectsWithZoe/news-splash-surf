@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   const { country, category } = req.query;
 
   try {
-    const url = `${BASE_URL}topic=${category}&country=${country}&apiKey=${API_KEY}`;
+    const url = `${BASE_URL}topic=${category}&country=${country}`;
     const options = {
       method: "GET",
       headers: {

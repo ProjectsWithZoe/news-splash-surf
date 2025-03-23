@@ -25,7 +25,7 @@ const NewsList: React.FC<NewsListProps> = ({ initialCategory = "general" }) => {
 
       const currentPage = resetList ? 1 : page;
       const response = await fetch(
-        `/api/fetchGeneralNews?country=us&category=${selectedCategory}&pageSize=10&page=1`
+        `/api/fetchGeneralNews?country=gb&category=${selectedCategory}`
       );
       const { articles: newArticles, totalResults } = await response.json();
 
