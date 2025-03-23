@@ -139,7 +139,9 @@ const NewsCard = ({ article, index, compact = false }) => {
           )}
           <div className="flex items-center justify-between pt-2 border-t border-border/40">
             <div className="flex items-center text-sm font-medium text-primary">
-              Read more <ChevronRight size={16} className="ml-1" />
+              <a href={article.link}>
+                Read more <ChevronRight size={16} className="ml-1" />
+              </a>
             </div>
             <div className="flex items-center gap-2">
               <button
