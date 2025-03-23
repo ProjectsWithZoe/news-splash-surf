@@ -170,7 +170,8 @@ const Article: React.FC = () => {
 
               <div className="mt-8 text-muted-foreground text-sm">
                 <p>
-                  This is a preview. Read the full article at:{" "}
+                  This is a preview. Read the full article{" "}
+                  <a href={article.link}> here</a>
                   <a
                     href={article.link}
                     target="_blank"
@@ -185,8 +186,8 @@ const Article: React.FC = () => {
           ) : (
             <div className="mt-8 text-muted-foreground">
               <p>
-                Full article content is not available in the API preview. Please
-                read the complete article at:{" "}
+                Full article content is not available in the preview. Please
+                read the complete article <a href={article.link}>here.</a>
                 <a
                   href={article.url}
                   target="_blank"
