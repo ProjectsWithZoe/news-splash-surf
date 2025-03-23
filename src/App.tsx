@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,20 +12,25 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import { Analytics } from "@vercel/analytics/react";
 
 const queryClient = new QueryClient();
 
 const App = () => {
   // Set up PWA service worker
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-          .then(registration => {
-            console.log('Service Worker registered with scope:', registration.scope);
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("/service-worker.js")
+          .then((registration) => {
+            console.log(
+              "Service Worker registered with scope:",
+              registration.scope
+            );
           })
-          .catch(error => {
-            console.error('Service Worker registration failed:', error);
+          .catch((error) => {
+            console.error("Service Worker registration failed:", error);
           });
       });
     }
@@ -39,6 +43,7 @@ const App = () => {
         <Sonner position="top-right" closeButton />
         <BrowserRouter>
           <Routes>
+            <Analytics />
             <Route path="/" element={<Index />} />
             <Route path="/article/:id" element={<Article />} />
             <Route path="/search" element={<Search />} />
