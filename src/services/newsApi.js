@@ -1,4 +1,7 @@
 import { toast } from "sonner";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // Define the available categories
 export const categories = [
