@@ -144,16 +144,14 @@ const Article: React.FC = () => {
 
           {article.photo_url && (
             <div className="relative aspect-video w-full mb-8 rounded-lg overflow-hidden shadow-subtle">
-              <a href={article.link}>
-                <img
-                  src={article.photo_url}
-                  alt={article.title}
-                  className={`h-full w-full object-cover transition-all duration-500 ${
-                    isImageLoaded ? "blur-0" : "blur-sm"
-                  }`}
-                  onLoad={() => setIsImageLoaded(true)}
-                />
-              </a>
+              <img
+                src={article.photo_url}
+                alt={article.title}
+                className={`h-full w-full object-cover transition-all duration-500 ${
+                  isImageLoaded ? "blur-0" : "blur-sm"
+                }`}
+                onLoad={() => setIsImageLoaded(true)}
+              />
             </div>
           )}
 
