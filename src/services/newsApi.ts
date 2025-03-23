@@ -21,7 +21,6 @@ export interface NewsArticle {
 // Define the available categories
 export const categories = [
   "WORLD",
-  "NATIONAL",
   "BUSINESS",
   "TECHNOLOGY",
   "ENTERTAINMENT",

@@ -31,14 +31,6 @@ const NewsList: React.FC<NewsListProps> = ({ initialCategory = "WORLD" }) => {
 
       console.log(articles);
 
-      /*const { articles: newArticles, totalResults } = await fetchTopHeadlines(
-        "us",
-        selectedCategory,
-        20,
-        currentPage
-      );*/
-      //'us',selectedCategory, 10, currentPage;
-
       // Add category to each article
       const articlesWithCategory = newArticles.map((article) => ({
         ...article,
@@ -103,7 +95,7 @@ const NewsList: React.FC<NewsListProps> = ({ initialCategory = "WORLD" }) => {
                   : "bg-secondary/50 text-muted-foreground hover:bg-secondary"
               }`}
             >
-              {category.charAt(0).toUpperCase() + category.slice(1)}
+              {category.slice(1).toLowerCase()}
             </button>
           ))}
         </div>
