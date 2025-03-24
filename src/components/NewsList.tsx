@@ -104,11 +104,11 @@ const NewsList: React.FC<NewsListProps> = ({ initialCategory = "WORLD" }) => {
         </div>
       </div>
 
-      {loading && (
+      {/*{loading && (
         <div className="flex items-center justify-center py-20">
           <Loader size="large" text={`Loading ${selectedCategory}...`} />
         </div>
-      )}
+      )}*/}
 
       {/* Articles grid */}
       {articles.length > 0 ? (
