@@ -29,8 +29,6 @@ const NewsList: React.FC<NewsListProps> = ({ initialCategory = "WORLD" }) => {
       );
       const { articles: newArticles, totalResults } = await response.json();
 
-      console.log(articles);
-
       // Add category to each article
       const articlesWithCategory = newArticles.map((article) => ({
         ...article,
@@ -63,8 +61,6 @@ const NewsList: React.FC<NewsListProps> = ({ initialCategory = "WORLD" }) => {
   }, [selectedCategory]);
 
   const handleCategoryChange = (category: string) => {
-    console.log("category changed to", category);
-    setLoading(true);
     setSelectedCategory(category);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -105,14 +101,15 @@ const NewsList: React.FC<NewsListProps> = ({ initialCategory = "WORLD" }) => {
         </div>
       </div>
 
-      {/*{loading && (
+      {/* Show loader when loading */}
+      {loading && (
         <div className="flex items-center justify-center py-20">
           <Loader size="large" text={`Loading ${selectedCategory}...`} />
         </div>
-      )}*/}
+      )}
 
       {/* Articles grid */}
-      {articles.length > 0 ? (
+      {!loading && articles.length > 0 ? (
         <div className="px-4 lg:px-0 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {articles.map((article, index) => (
@@ -149,15 +146,11 @@ const NewsList: React.FC<NewsListProps> = ({ initialCategory = "WORLD" }) => {
             Showing {articles.length} of {totalResults} articles
           </div>
         </div>
-      ) : loading ? (
-        <div className="flex items-center justify-center py-20">
-          <Loader size="large" text="Loading top headlines..." />
-        </div>
-      ) : (
+      ) : !loading && articles.length === 0 ? (
         <div className="text-center py-16">
           <p className="text-muted-foreground">No articles found</p>
         </div>
-      )}
+      ) : null}
     </div>
   );
 };
