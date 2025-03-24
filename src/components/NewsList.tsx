@@ -104,7 +104,13 @@ const NewsList: React.FC<NewsListProps> = ({ initialCategory = "WORLD" }) => {
       {/* Show loader when loading */}
       {loading && (
         <div className="flex items-center justify-center py-20">
-          <Loader size="large" text={`Loading ${selectedCategory}...`} />
+          <Loader
+            size="large"
+            text={`Loading latest ${
+              selectedCategory.charAt(0).toUpperCase() +
+              selectedCategory.slice(1)
+            } news...`}
+          />
         </div>
       )}
 
