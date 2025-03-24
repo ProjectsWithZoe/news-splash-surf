@@ -58,6 +58,7 @@ const NewsList: React.FC<NewsListProps> = ({ initialCategory = "WORLD" }) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     loadNews(true);
   }, [selectedCategory]);
 
