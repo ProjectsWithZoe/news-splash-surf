@@ -32,8 +32,8 @@ const Index: React.FC = () => {
             {formattedDate}
           </h1>
           <p className="text-center text-muted-foreground max-w-2xl mx-auto">
-            Stay informed with the latest headlines and breaking news from
-            around the world.
+            Stay informed with the latest Trumpless/Muskless headlines and
+            breaking news from around the world.
           </p>
           <Separator className="my-8" />
         </section>
