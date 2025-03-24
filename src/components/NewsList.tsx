@@ -108,7 +108,7 @@ const NewsList: React.FC<NewsListProps> = ({ initialCategory = "WORLD" }) => {
             size="large"
             text={`Loading latest ${
               selectedCategory.charAt(0).toUpperCase() +
-              selectedCategory.slice(1)
+              selectedCategory.slice(1).toLowerCase()
             } news...`}
           />
         </div>
