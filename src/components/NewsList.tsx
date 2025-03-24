@@ -62,6 +62,8 @@ const NewsList: React.FC<NewsListProps> = ({ initialCategory = "WORLD" }) => {
   }, [selectedCategory]);
 
   const handleCategoryChange = (category: string) => {
+    console.log("category changed to", category);
+    setLoading(true);
     setSelectedCategory(category);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
