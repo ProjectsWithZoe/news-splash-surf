@@ -99,11 +99,16 @@ const NewsList: React.FC<NewsListProps> = ({ initialCategory = "WORLD" }) => {
             >
               {category.charAt(0).toUpperCase() +
                 category.slice(1).toLowerCase()}
-              {loading && <Loader size="small" className="mr-2" />}
             </button>
           ))}
         </div>
       </div>
+
+      {loading && (
+        <div className="flex items-center justify-center py-20">
+          <Loader size="large" text={`Loading ${selectedCategory}...`} />
+        </div>
+      )}
 
       {/* Articles grid */}
       {articles.length > 0 ? (
